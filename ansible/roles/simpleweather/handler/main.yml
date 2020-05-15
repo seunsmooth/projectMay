@@ -1,0 +1,16 @@
+---
+    - name: Clone simplyweather
+        repo: https://github.com/seunsmooth/devops-essentials-sample-app.git
+        dest: /var/www/html/simplyweather
+    
+    - name: Copy simplyweather nginx configuration to sites-available
+      template:
+        src: templates/simplyweather.conf.j2
+        dest: /etc/nginx/sites-available/simplyweather.conf
+    
+    - name: Create sites-enabled symlink for nginx simplyweather port 80 configuration
+      file:
+        src: /etc/nginx/sites-available/simplyweather.conf
+        dest: /etc/nginx/sites-enabled/simplyweather.conf
+        state: link
+      notify: restart nginx
