@@ -1,0 +1,18 @@
+{
+    "builders": [{
+       "type": "amazon-ebs",
+       "region": "eu-west-2",
+       "source_ami": "ami-0eb89db7593b5d434",
+       "instance_type": "t2.micro",
+       "ssh_username": "ubuntu",
+       "ami_name": "api-nginx {{timestamp}}"
+     }],
+     "provisioners": [
+      {
+        "type": "shell",
+        "scripts": [ "scripts/nginx_install.sh" ],
+        "execute_command": "{{ .Vars}} sudo -E  sh '{{.Path}}'",
+        "pause_before": "10s"
+      }]
+   }
+   
