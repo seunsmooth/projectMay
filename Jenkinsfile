@@ -2,16 +2,23 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            parallel {
-                stage('Build bluebox node and redbox node'){
-                    steps {
-                        sh 'git clone https://github.com/seunsmooth/projectMay.git '
-                        sh 'cd script'
-                        sh 'sudo chmod +x./code_deploy.sh'
-                        sh 'sudo ./code_deploy.sh'
-                    }
-                }
+            steps {
+                echo 'Building..'
+                sh 'cd scripts'
+                sh  'chmod +x code_deploy.sh'
+                sh  'sudo ./code_deploy.sh'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
 }
+
