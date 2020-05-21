@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.sites
+  region = "eu-west-1"
 
 
 }
