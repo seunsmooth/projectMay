@@ -10,7 +10,7 @@ variable "instance_type" {
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "~/play/terraform/olukey.pub"
+  default = "olukey.pub"
 }
 
 variable "PATH_TO_PRIVATE_KEY" {
