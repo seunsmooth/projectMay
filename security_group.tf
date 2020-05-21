@@ -1,6 +1,6 @@
 resource "aws_security_group" "nginx_allow-dev" {
   name        = "allow-ssh-dev"
-  vpc_id      = module.vpc-dev.vpc_id
+  vpc_id      = module.vpc-prod.vpc_id
   description = "nginx security group "
   tags = {
     Name = "nginx SG"
