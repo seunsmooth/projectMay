@@ -1,7 +1,7 @@
 #variable "ami_id" {
 # default = "ami-0f2ed58082cb08a4d"
 #}
-variable "sites" {
+variable "region" {
   default = "eu-west-2"
 }
 
