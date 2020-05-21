@@ -1,7 +1,7 @@
 #variable "ami_id" {
 # default = "ami-0f2ed58082cb08a4d"
 #}
-variable "region" {
+variable "sites" {
   default = "eu-west-2"
 }
 
@@ -10,11 +10,11 @@ variable "instance_type" {
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "../../weather/olukey.pub"
+  default = "~/play/tutorial/weather/olukey.pub"
 }
 
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "../../weather/olukey"
+  default = "~/play/tutorial/weather/olukey"
 }
 
 variable "vpc_cidr" {

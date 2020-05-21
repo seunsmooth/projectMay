@@ -4,17 +4,17 @@ resource "aws_key_pair" "olukey-id" {
 }
 
 resource "aws_instance" "proxy_server" {
-  instance_type               = "t2.micro"
-  ami                         = var.AMI_ID_NGINX
-  subnet_id                   =  module.vpc-prod.public_subnets[0]
-  vpc_security_group_ids      =  [aws_security_group.sg-prod.id]
- #subnet_id                   = var.ENV == "dev" ? module.vpc-dev.public_subnets[0] : module.vpc-prod.public_subnets[0]
+  instance_type          = "t2.micro"
+  ami                    = var.AMI_ID_NGINX
+  subnet_id              = module.vpc-prod.public_subnets[0]
+  vpc_security_group_ids = [aws_security_group.sg-prod.id]
+  #subnet_id                   = var.ENV == "dev" ? module.vpc-dev.public_subnets[0] : module.vpc-prod.public_subnets[0]
   #vpc_security_group_ids      = [var.ENV == "dev" ? aws_security_group.sg-dev.id : aws_security_group.sg-prod.id]
-  key_name                     = "olukey"
+  key_name = "olukey"
   tags = {
     Name = "proxy_server-${var.stack}"
   }
-  
+
   provisioner "local-exec" {
     command = "echo 'proxy_server is ' ${aws_instance.proxy_server.private_ip} >> private_ips.txt"
   }
@@ -29,11 +29,11 @@ output "ip" {
 
 
 resource "aws_instance" "bluebox" {
-  instance_type               = "t2.micro"
-  ami                         = var.AMI_ID_WEB
-  subnet_id                   =  module.vpc-prod.public_subnets[0]
-  vpc_security_group_ids      =  [aws_security_group.sg-prod.id]
-  key_name                    = "olukey"
+  instance_type          = "t2.micro"
+  ami                    = var.AMI_ID_WEB
+  subnet_id              = module.vpc-prod.public_subnets[0]
+  vpc_security_group_ids = [aws_security_group.sg-prod.id]
+  key_name               = "olukey"
 
   tags = {
     Name = "bluebox-${var.stack}"
@@ -50,19 +50,19 @@ resource "aws_instance" "bluebox" {
 }
 
 resource "aws_instance" "redbox" {
-  instance_type               = "t2.micro"
-  ami                         = var.AMI_ID_WEB
-  subnet_id                   =  module.vpc-prod.public_subnets[0]
-  vpc_security_group_ids      =  [aws_security_group.sg-prod.id]
-  key_name                    = "olukey"
+  instance_type          = "t2.micro"
+  ami                    = var.AMI_ID_WEB
+  subnet_id              = module.vpc-prod.public_subnets[0]
+  vpc_security_group_ids = [aws_security_group.sg-prod.id]
+  key_name               = "olukey"
   tags = {
     Name = "redbox-${var.stack}"
   }
-  
-provisioner "local-exec" {
+
+  provisioner "local-exec" {
     command = "echo 'redbox private'${aws_instance.redbox.private_ip} >> private_ips.txt"
   }
-lifecycle {
+  lifecycle {
     create_before_destroy = true
   }
 }
